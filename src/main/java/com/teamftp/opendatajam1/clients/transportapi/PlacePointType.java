@@ -1,6 +1,6 @@
 package com.teamftp.opendatajam1.clients.transportapi;
 
-public enum PlacePoint {
+public enum PlacePointType {
     PLACE(0),
     ROAD(1),
     TRANSIT_STOP(2),
@@ -22,7 +22,7 @@ public enum PlacePoint {
 
     private final int value;
 
-    PlacePoint(final int newValue) {
+    PlacePointType(final int newValue) {
         value = newValue;
     }
 
