@@ -39,6 +39,7 @@ dependencies {
 
     // api client libraries
     compile files('libs/transit-swagger-client.jar')
+    compile files('libs/highways-swagger-client.jar')
 
     // all the rest
     // https://mvnrepository.com/artifact/com.google.guava/guava

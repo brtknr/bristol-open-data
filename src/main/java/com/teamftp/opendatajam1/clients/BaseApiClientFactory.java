@@ -1,4 +1,4 @@
-package com.teamftp.opendatajam1.transportapiclients;
+package com.teamftp.opendatajam1.clients;
 
 import com.google.common.base.Strings;
 import com.teamftp.opendatajam1.AppConfiguration;
@@ -7,11 +7,11 @@ import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;
 
-class BaseApiClientFactory<T> {
+public class BaseApiClientFactory<T> {
     private T dataApi;
 
     @SneakyThrows
-    BaseApiClientFactory(AppConfiguration appConfiguration, Class<T> clazz) {
+    protected BaseApiClientFactory(AppConfiguration appConfiguration, Class<T> clazz) {
         String apiKey = appConfiguration.getApiKey();
 
         if (Strings.isNullOrEmpty(apiKey)) throw new Exception("Provide the api key in application.properties");
@@ -19,7 +19,7 @@ class BaseApiClientFactory<T> {
         dataApi = createDataApi(apiKey, clazz);
     }
 
-    T getInstance() {
+    public T getInstance() {
         return dataApi;
     }
 

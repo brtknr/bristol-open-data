@@ -1,4 +1,4 @@
-package com.teamftp.opendatajam1.transportapiclients;
+package com.teamftp.opendatajam1.clients.transportapi;
 
 import io.swagger.client.api.AdvancePlanningApi;
 import org.junit.Ignore;

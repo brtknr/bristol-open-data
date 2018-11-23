@@ -1,6 +1,7 @@
-package com.teamftp.opendatajam1.transportapiclients;
+package com.teamftp.opendatajam1.clients.transportapi;
 
 import com.teamftp.opendatajam1.AppConfiguration;
+import com.teamftp.opendatajam1.clients.BaseApiClientFactory;
 import io.swagger.client.api.AdvancePlanningApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,7 @@ class AdvancePlanningApiFactory extends BaseApiClientFactory<AdvancePlanningApi>
 
     @Override
     @Bean("AdvancePlanningApi")
-    AdvancePlanningApi getInstance() {
+    public AdvancePlanningApi getInstance() {
         return super.getInstance();
     }
 }
