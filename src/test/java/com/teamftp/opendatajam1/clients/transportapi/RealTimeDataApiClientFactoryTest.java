@@ -30,4 +30,9 @@ public class RealTimeDataApiClientFactoryTest {
         List<TransitStopRTIReport> rtiReports = apiResponseTransitStopRTIResponse.getData().getRtiReports();
         Assert.assertFalse(rtiReports.isEmpty());
     }
+
+    @Test
+    public void foo() {
+
+    }
 }

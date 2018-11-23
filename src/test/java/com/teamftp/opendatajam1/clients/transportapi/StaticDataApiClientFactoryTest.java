@@ -30,4 +30,19 @@ public class StaticDataApiClientFactoryTest {
         List<PlacePoint> placePointList = queryResult.getData().getPlacePoints();
         Assert.assertFalse(placePointList.isEmpty());
     }
+
+    @Test
+    public void foo() {
+//        staticDataApi.agenciesGet();
+//        staticDataApi.importSourcesGet();
+//        staticDataApi.placePointsGet();
+//        staticDataApi.placesList();
+//        staticDataApi.routesInfoCallingAtStop();
+//        staticDataApi.routesInfoLineName();
+//        staticDataApi.routesInfoSource();
+//        staticDataApi.stopCallsGet();
+//        staticDataApi.stopsGet();
+//        staticDataApi.tripGroupsByCalendar();
+//        staticDataApi.tripsGet();
+    }
 }
