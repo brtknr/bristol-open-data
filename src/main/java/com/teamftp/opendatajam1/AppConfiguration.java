@@ -9,4 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppConfiguration {
     private String apiKey;
+
+    public String getApiVersion() {
+        return "2.0";
+    }
+
+    public double getBristolLatitude() {
+        return 51.454514;
+    }
+
+    public double getBristolLongitude() {
+        return -2.587910;
+    }
 }

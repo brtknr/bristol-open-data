@@ -1,9 +1,11 @@
 package com.teamftp.opendatajam1.clients.transportapi;
 
+import com.teamftp.opendatajam1.AppConfiguration;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.StaticDataApi;
 import io.swagger.client.model.APIResponsePlacePointList;
 import io.swagger.client.model.PlacePoint;
+import io.swagger.client.model.PlacePointList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,9 @@ public class StaticDataApiClientFactoryTest {
     @Autowired
     StaticDataApi staticDataApi;
 
+    @Autowired
+    AppConfiguration appConfiguration;
+
     @Test
     public void fetches_placesList() throws ApiException {
         // given
@@ -32,7 +37,18 @@ public class StaticDataApiClientFactoryTest {
     }
 
     @Test
-    public void foo() {
+    public void nulls_for_optional_parameters() throws ApiException {
+        // given
+
+        // when
+        APIResponsePlacePointList passage = staticDataApi.placesList("Passage", "2.0", null, appConfiguration.getBristolLatitude(), appConfiguration.getBristolLongitude(), null, null);
+
+        // then
+        PlacePointList data = passage.getData();
+        Assert.assertEquals(9, data.getPlacePoints().size());
+    }
+
+    public void methods() {
 //        staticDataApi.agenciesGet();
 //        staticDataApi.importSourcesGet();
 //        staticDataApi.placePointsGet();
