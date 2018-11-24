@@ -1,7 +1,11 @@
 java:
   stage: test
+  services:
+  - docker:dind
+  image: openjdk:8-jdk-alpine
   script:
-  - gradle test
+  - ./gradlew bootJar
+  - ./gradlew test
   artifacts:
     reports:
-      junit: build/test-results/test/TEST-*.xml
+      junit: build/test-results/test/*.xml
