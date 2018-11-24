@@ -1,32 +1,53 @@
-buildscript {
-    ext {
-        springBootVersion = '2.1.0.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'eclipse'
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id 'com.adarshr.test-logger' version '1.5.0'                    // logging tests output
+    id 'net.ltgt.apt' version '0.19'                                // required by lombok
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.0.5"
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.teamftp'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
+    jcenter()
     mavenCentral()
 }
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+testlogger {
+    theme 'mocha'           // mocha, standard, plain, mocha-parallel, standard-parallel or plain-parallel
+    showExceptions true     // set to false to disable detailed failure logs
+    slowThreshold 10        // set threshold in milliseconds to highlight slow tests
+    showSummary true        // displays a breakdown of passes, failures and skips along with total duration
+    showPassed true         // set to false to hide passed tests
+    showSkipped true        // set to false to hide skipped tests
+    showFailed true         // set to false to hide failed tests
+
+    showStandardStreams false       // enable to see standard out and error streams inline with the test results
+    showPassedStandardStreams true  // set to false to hide passed standard out and error streams
+    showSkippedStandardStreams true // set to false to hide skipped standard out and error streams
+    showFailedStandardStreams true  // set to false to hide failed standard out and error streams
+}
+
+ext {
+    lombokVersion = '1.18.4'
+    swaggerVersion = '2.8.0'
+    guavaVersion = '27.0-jre'
+}
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-//    implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
     // swagger client libs dependencies
@@ -42,11 +63,9 @@ dependencies {
     compile files('libs/highways-swagger-client.jar')
 
     // all the rest
-    // https://mvnrepository.com/artifact/com.google.guava/guava
-    compile group: 'com.google.guava', name: 'guava', version: '27.0-jre'
+    implementation "com.google.guava:guava:${guavaVersion}"
+    compile "org.projectlombok:lombok:${lombokVersion}"
 
-    testCompile('org.projectlombok:lombok')
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor
-    compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.1.0.RELEASE'
 }
