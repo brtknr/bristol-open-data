@@ -1,7 +1,7 @@
 import * as constants from './constants.js'
 import * as busMarkerModule from './bus-marker-module.js';
 
-let map = L.map('mapid').setView([constants.bristolCoordinates.lat + 0.002, constants.bristolCoordinates.long], 16);
+let map = L.map('mapid').setView([constants.bristolCoordinates.lat + 0.002, constants.bristolCoordinates.long - 0.003], 15);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWVsbWV4IiwiYSI6ImNqb3c3eTljYTFwOGIzcWxrcmtidGsybjMifQ.uT34uyxAR71bitfzLBot7w', {
     maxZoom: 18,
