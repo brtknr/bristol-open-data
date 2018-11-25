@@ -33,7 +33,36 @@ let marlboroughStreetRoute1 = [
     new busMarkerModule.Coordinates(51.4598, -2.6012),
 ]
 
-let routes = [baldwinStreetRoute1, broadWeirRoute1, marlboroughStreetRoute1];
+let cribsCauseWayToNineTreeHill = [
+    new busMarkerModule.Coordinates(51.452316, -2.596988),
+    new busMarkerModule.Coordinates(51.455962, -2.596103),
+    new busMarkerModule.Coordinates(51.458903, -2.591598),
+    new busMarkerModule.Coordinates(51.460316, -2.591121),
+    new busMarkerModule.Coordinates(51.464804, -2.590090)
+]
+
+
+let CollegeGreenToCliftonDown = [
+    new busMarkerModule.Coordinates(51.452926, -2.600861),
+    new busMarkerModule.Coordinates(51.455961, -2.605528),
+    new busMarkerModule.Coordinates(51.456483, -2.608060),
+    new busMarkerModule.Coordinates(51.460982, -2.608671),
+    new busMarkerModule.Coordinates(51.464224, -2.609669)
+]
+
+
+let NineTreeHillToTriangleWest = [
+    new busMarkerModule.Coordinates(51.464804, -2.590090),
+    new busMarkerModule.Coordinates(51.460982, -2.608671),
+    new busMarkerModule.Coordinates(51.458903, -2.591598)
+]
+
+let routes = [baldwinStreetRoute1, 
+    broadWeirRoute1, 
+    marlboroughStreetRoute1, 
+    cribsCauseWayToNineTreeHill,
+    CollegeGreenToCliftonDown, 
+    NineTreeHillToTriangleWest];
 
 for (let route of routes) {
     let busMarker = new busMarkerModule.BusMarker(map, route[0]);
