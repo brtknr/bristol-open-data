@@ -5,7 +5,7 @@ let bristolCoordinates = {
     long: -2.587910
 }
 
-let mymap = L.map('mapid').setView([bristolCoordinates.lat, bristolCoordinates.long], 13);
+let mymap = L.map('mapid').setView([bristolCoordinates.lat, bristolCoordinates.long], 30);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWVsbWV4IiwiYSI6ImNqb3c3eTljYTFwOGIzcWxrcmtidGsybjMifQ.uT34uyxAR71bitfzLBot7w', {
     maxZoom: 18,
@@ -62,6 +62,6 @@ let currentMarkerPosition = new MarkerPosition();
 setInterval(() => {
     if (debug)
         console.log(`new pos: ${currentMarkerPosition.toString()}`);
-    currentMarkerPosition = currentMarkerPosition.withCoordinatesDelta(0.0001);
+    currentMarkerPosition = currentMarkerPosition.withCoordinatesDelta(0.000001);
     moveMarker(currentMarkerPosition.lat, currentMarkerPosition.long);
 }, 100);
