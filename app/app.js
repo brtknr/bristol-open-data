@@ -81,7 +81,7 @@ for (let route of cribsCauseWayToNineTreeHill) {
 }
 
 var polylineOptions = {
-    color: 'yellow',
+    color: 'blue',
     weight: 6,
     opacity: 0.9
 };
