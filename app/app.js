@@ -57,12 +57,12 @@ let NineTreeHillToTriangleWest = [
     new busMarkerModule.Coordinates(51.458903, -2.591598)
 ]
 
-let routes = [baldwinStreetRoute1, 
-    broadWeirRoute1, 
-    marlboroughStreetRoute1, 
-    cribsCauseWayToNineTreeHill,
-    CollegeGreenToCliftonDown, 
-    NineTreeHillToTriangleWest];
+let routes = [baldwinStreetRoute1,
+              broadWeirRoute1,
+              marlboroughStreetRoute1,
+              cribsCauseWayToNineTreeHill,
+              CollegeGreenToCliftonDown,
+              NineTreeHillToTriangleWest];
 
 for (let route of routes) {
     let busMarker = new busMarkerModule.BusMarker(map, route[0]);
