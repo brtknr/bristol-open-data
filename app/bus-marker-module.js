@@ -25,15 +25,15 @@ export class Coordinates {
 }
 
 export class BusMarker {
-    constructor(map, coordinates = new Coordinates()) {
+    constructor(map, coordinates = new Coordinates(), selected) {
         this.currentCoordinates = coordinates;
 
-        let busIcon = this._getBusIcon();
+        let busIcon = this._getBusIcon(selected);
 
-        this._marker = L.marker([coordinates.lat, coordinates.long], { icon: busIcon }).addTo(map);
+        this._marker = L.marker([coordinates.lat, coordinates.long], {icon: busIcon}).addTo(map);
 
         return this;
-    }   
+    }
 
     moveMarker(lat, long) {
         this.currentCoordinates = new Coordinates(lat, long);
@@ -91,38 +91,47 @@ export class BusMarker {
     }
 
     // https://leafletjs.com/examples/custom-icons/
-    _getBusIcon() {
+    _getBusIcon(selected) {
         let busIcon = L.Icon.extend({
             options: {
                 iconSize: [30, 30]
             }
         })
 
-        return new busIcon({ iconUrl: 'assets/icon-double-decker-bus.png' });
+        if (selected) {
+            return new busIcon({iconUrl: 'assets/icon-double-decker-bus-selected.png'});
+        } else {
+            return new busIcon({iconUrl: 'assets/icon-double-decker-bus.png'});
+        }
     }
 }
 
 export class BusStop {
-    constructor(map, coordinates = new Coordinates()) {
+    constructor(map, coordinates = new Coordinates(), selected) {
         this.currentCoordinates = coordinates;
 
-        let stopIcon = this._getStopIcon();
+        let stopIcon = this._getStopIcon(selected);
 
-        this._marker = L.marker([coordinates.lat, coordinates.long], { icon: stopIcon }).addTo(map);
+        this._marker = L.marker([coordinates.lat, coordinates.long], {icon: stopIcon}).addTo(map);
 
         return this;
     }
-    
-     // https://leafletjs.com/examples/custom-icons/
-     _getStopIcon() {
+
+    // https://leafletjs.com/examples/custom-icons/
+    _getStopIcon(selected) {
         let stopIcon = L.Icon.extend({
             options: {
                 iconSize: [20, 20]
             }
         })
 
-        return new stopIcon({ iconUrl: 'assets/busStop.png' });
+        if (selected) {
+            return new stopIcon({iconUrl: 'assets/busStop.png'});
+        } else {
+            return new stopIcon({iconUrl: 'assets/busStopNonSelected.png'});
+
+        }
     }
-    
-    
+
+
 }
