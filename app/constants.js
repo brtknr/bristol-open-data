@@ -3,4 +3,4 @@ export const bristolCoordinates = {
     long: -2.587910
 };
 
-export let debug = true;
+export let debug = false;
