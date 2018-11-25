@@ -44,7 +44,7 @@
     </div>
     <div class="row">
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Live map</h5>
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 d-flex align-items-stretch">
+        <div class="col-md-4 d-flex align-items-stretch">
 
             <div class="card ">
                 Choose the bus line:
@@ -75,13 +75,10 @@
                     <h5 class="card-title">Stats for Bus 75</h5>
                     <p class="card-text">
                     <ul class="list-group">
-                        <li class="list-group-item">Current position: * lat, * long</li>
-                        <li class="list-group-item">Heading towards stop: *</li>
-                        <li class="list-group-item">Scheduled arrival: 12:31 pm</li>
-                        <li class="list-group-item">Expected arrival: 12:34 pm</li>
-                        <li class="list-group-item">Delay (Bristol API): 2 min</li>
-                        <li class="list-group-item">Delay (Bus Team): 3 min</li>
-                        <li class="list-group-item">Space inside: mildly crowded</li>
+                        <li class="list-group-item" id="actual-arrival-time">Actual arrival time: 12:36 pm</li>
+                        <li class="list-group-item" id="average-delay">Average delay: 3 min</li>
+                        <li class="list-group-item" id="estimated-arrival-time">Estimated arrival time: 12:35</li>
+                        <li class="list-group-item" id="scheduled-arrival-time">Scheduled arrival time: 12:32 pm</li>
                     </ul>
                     <button class="btn btn-primary" type="button">Green walk alternative</button>
                     <button class="btn btn-primary" type="button">A bench nearby</button>
