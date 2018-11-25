@@ -58,18 +58,33 @@ let NineTreeHillToTriangleWest = [
 ]
 
 let routes = [baldwinStreetRoute1,
-              broadWeirRoute1,
-              marlboroughStreetRoute1,
-              cribsCauseWayToNineTreeHill,
-              CollegeGreenToCliftonDown,
-              NineTreeHillToTriangleWest];
+    broadWeirRoute1,
+    marlboroughStreetRoute1,
+    cribsCauseWayToNineTreeHill,
+    CollegeGreenToCliftonDown,
+    NineTreeHillToTriangleWest];
 
 for (let route of routes) {
     let busMarker = new busMarkerModule.BusMarker(map, route[0]);
 
     for (let stop of route) {
-        new busMarkerModule.BusStop(map, stop);            
+        new busMarkerModule.BusStop(map, stop);
     }
+
     busMarker.followPath(route.slice(1));
 }
 
+var stops = [];
+
+for (let route of cribsCauseWayToNineTreeHill) {
+    stops.push(new L.LatLng(route.lat, route.long))
+}
+
+var polylineOptions = {
+    color: 'blue',
+    weight: 6,
+    opacity: 0.9
+};
+
+var polyline = new L.Polyline(stops, polylineOptions);
+map.addLayer(polyline);
