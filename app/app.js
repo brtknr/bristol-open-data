@@ -33,7 +33,15 @@ let marlboroughStreetRoute1 = [
     new busMarkerModule.Coordinates(51.4598, -2.6012),
 ]
 
-let routes = [baldwinStreetRoute1, broadWeirRoute1, marlboroughStreetRoute1];
+let cribsCauseWayToNineTreeHill = [
+    new busMarkerModule.Coordinates(51.452316, -2.596988),
+    new busMarkerModule.Coordinates(51.455962, -2.596103),
+    new busMarkerModule.Coordinates(51.458903, -2.591598),
+    new busMarkerModule.Coordinates(51.460316, -2.591121),
+    new busMarkerModule.Coordinates(51.464804, -2.590090)
+]
+
+let routes = [baldwinStreetRoute1, broadWeirRoute1, marlboroughStreetRoute1, cribsCauseWayToNineTreeHill];
 
 for (let route of routes) {
     let busMarker = new busMarkerModule.BusMarker(map, route[0]);
