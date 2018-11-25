@@ -33,7 +33,7 @@ export class BusMarker {
         this._marker = L.marker([coordinates.lat, coordinates.long], { icon: busIcon }).addTo(map);
 
         return this;
-    }
+    }   
 
     moveMarker(lat, long) {
         this.currentCoordinates = new Coordinates(lat, long);
@@ -100,4 +100,29 @@ export class BusMarker {
 
         return new busIcon({ iconUrl: 'assets/icon-double-decker-bus.png' });
     }
+}
+
+export class BusStop {
+    constructor(map, coordinates = new Coordinates()) {
+        this.currentCoordinates = coordinates;
+
+        let stopIcon = this._getStopIcon();
+
+        this._marker = L.marker([coordinates.lat, coordinates.long], { icon: stopIcon }).addTo(map);
+
+        return this;
+    }
+    
+     // https://leafletjs.com/examples/custom-icons/
+     _getStopIcon() {
+        let stopIcon = L.Icon.extend({
+            options: {
+                iconSize: [20, 20]
+            }
+        })
+
+        return new stopIcon({ iconUrl: 'assets/busStop.png' });
+    }
+    
+    
 }

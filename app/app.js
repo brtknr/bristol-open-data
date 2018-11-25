@@ -66,5 +66,10 @@ let routes = [baldwinStreetRoute1,
 
 for (let route of routes) {
     let busMarker = new busMarkerModule.BusMarker(map, route[0]);
+
+    for (let stop of route) {
+        new busMarkerModule.BusStop(map, stop);            
+    }
     busMarker.followPath(route.slice(1));
 }
+
