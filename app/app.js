@@ -15,7 +15,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-let marker = L.marker([bristolCoordinates.lat, bristolCoordinates.long]).addTo(mymap);
 
 class MarkerPosition {
     constructor(lat = bristolCoordinates.lat, long = bristolCoordinates.long) {
@@ -27,10 +26,31 @@ class MarkerPosition {
         return new MarkerPosition(this.lat + newLat, this.long + newLong);
     }
 
-    toString(){
+    toString() {
         return `lat: ${this.lat}, long; ${this.long}`;
     }
 }
+
+class Marker {
+    constructor(map, markerPosition = new MarkerPosition()) {
+        let busIcon = this._getBusIcon();
+
+        return L.marker([markerPosition.lat, markerPosition.long], { icon: busIcon }).addTo(mymap);
+    }
+
+    // https://leafletjs.com/examples/custom-icons/
+    _getBusIcon() {
+        let busIcon = L.Icon.extend({
+            options: {
+                iconSize: [30, 30]
+            }
+        })
+
+        return new busIcon({ iconUrl: 'assets/icon-double-decker-bus.png' });
+    }
+}
+
+let marker = new Marker();
 
 function moveMarker(lat, long) {
     var newLatLng = new L.LatLng(lat, long);
