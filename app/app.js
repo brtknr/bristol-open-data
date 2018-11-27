@@ -1,5 +1,6 @@
 import * as constants from './constants.js'
 import * as busMarkerModule from './bus-marker-module.js';
+import * as sidebar from './sidebar.js';
 
 let map = L.map('mapid').setView([constants.bristolCoordinates.lat + 0.002, constants.bristolCoordinates.long - 0.003], 15);
 
@@ -33,7 +34,7 @@ let marlboroughStreetRoute1 = [
     new busMarkerModule.Coordinates(51.4598, -2.6012),
 ]
 
-let cribsCauseWayToNineTreeHill = [
+let selectedBusRouteCribsCauseWayToNineTreeHill = [
     new busMarkerModule.Coordinates(51.452316, -2.596988),
     new busMarkerModule.Coordinates(51.455962, -2.596103),
     new busMarkerModule.Coordinates(51.458903, -2.591598),
@@ -41,8 +42,7 @@ let cribsCauseWayToNineTreeHill = [
     new busMarkerModule.Coordinates(51.464804, -2.590090)
 ]
 
-
-let CollegeGreenToCliftonDown = [
+let collegeGreenToCliftonDown = [
     new busMarkerModule.Coordinates(51.452926, -2.600861),
     new busMarkerModule.Coordinates(51.455961, -2.605528),
     new busMarkerModule.Coordinates(51.456483, -2.608060),
@@ -50,8 +50,8 @@ let CollegeGreenToCliftonDown = [
     new busMarkerModule.Coordinates(51.464224, -2.609669)
 ]
 
-
-let NineTreeHillToTriangleWest = [
+// main bus
+let nineTreeHillToTriangleWest = [
     new busMarkerModule.Coordinates(51.464804, -2.590090),
     new busMarkerModule.Coordinates(51.460982, -2.608671),
     new busMarkerModule.Coordinates(51.458903, -2.591598)
@@ -60,14 +60,48 @@ let NineTreeHillToTriangleWest = [
 let routes = [baldwinStreetRoute1,
     broadWeirRoute1,
     marlboroughStreetRoute1,
-    CollegeGreenToCliftonDown,
-    NineTreeHillToTriangleWest,
-    cribsCauseWayToNineTreeHill
+    collegeGreenToCliftonDown,
+    nineTreeHillToTriangleWest,
+    selectedBusRouteCribsCauseWayToNineTreeHill
 ];
 
+let sidebarDataList = [
+    new sidebar.SidebarData(
+        1, 2, 3, 4, 5
+    ),
+    new sidebar.SidebarData(
+        3, 3, 3, 3, 3
+    ),
+    new sidebar.SidebarData(
+        4, 5, 5, 5, 5
+    ),
+    new sidebar.SidebarData(
+        5, 5, 5, 5, 5
+    ),
+    new sidebar.SidebarData(
+        6, 5, 5, 5, 5
+    ),
+    new sidebar.SidebarData(
+        7, 5, 5, 5, 5
+    ),
+    new sidebar.SidebarData(
+        8, 5, 5, 5, 5
+    )
+];
+
+/* sidebar */
+
+let sidebarUpdater = new sidebar.SidebarUpdater();
+
+let currentStopId = 0;
+let onSelectedBusStopReachedCallback = () => {
+    sidebarUpdater.updateFields(document, sidebarDataList[currentStopId++]);
+}
+
+/* /sidebar */
 
 for (var i = 0; i < routes.length; i++) {
-    let route = routes [i];
+    let route = routes[i];
     var selected = false;
 
     if (i == 5) {
@@ -80,12 +114,16 @@ for (var i = 0; i < routes.length; i++) {
         new busMarkerModule.BusStop(map, stop, selected);
     }
 
-    busMarker.followPath(route.slice(1));
+    let isSelectedBusRoute = route == selectedBusRouteCribsCauseWayToNineTreeHill;
+    let onBusStopReachedCallback = isSelectedBusRoute
+        ? onSelectedBusStopReachedCallback
+        : () => {};
+    busMarker.followPath(route.slice(1), onBusStopReachedCallback);
 }
 
 var stops = [];
 
-for (let route of cribsCauseWayToNineTreeHill) {
+for (let route of selectedBusRouteCribsCauseWayToNineTreeHill) {
     stops.push(new L.LatLng(route.lat, route.long))
 }
 

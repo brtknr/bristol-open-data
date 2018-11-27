@@ -30,7 +30,7 @@ export class BusMarker {
 
         let busIcon = this._getBusIcon(selected);
 
-        this._marker = L.marker([coordinates.lat, coordinates.long], {icon: busIcon}).addTo(map);
+        this._marker = L.marker([coordinates.lat, coordinates.long], { icon: busIcon }).addTo(map);
 
         return this;
     }
@@ -45,7 +45,7 @@ export class BusMarker {
         this._updatePosition();
     }
 
-    async followPath(coordinatesArray, speed = 0.00005) {
+    async followPath(coordinatesArray, onBusStopReachedCallback, speed = 0.00005) {
         for (let destinationCoordinates of coordinatesArray) {
             await new Promise((resolve, reject) => {
                 if (constants.debug) console.log(`current destination: ${destinationCoordinates}`);
@@ -61,17 +61,24 @@ export class BusMarker {
                 let interval = setInterval(() => {
                     if (constants.debug) console.log(`current position: ${this.currentCoordinates.toString()}`);
 
-                    if (!floatingPointEquals(destinationCoordinates.lat, this.currentCoordinates.lat)) {
+                    let reachedDestinationLat = floatingPointEquals(destinationCoordinates.lat, this.currentCoordinates.lat);
+                    if (!reachedDestinationLat) {
                         let latDirection = destinationCoordinates.lat > this.currentCoordinates.lat ? 1 : -1;
                         this.moveMarkerByDelta(latDirection * latSpeed);
                     }
 
-                    if (!floatingPointEquals(destinationCoordinates.long, this.currentCoordinates.long)) {
+                    let reachedDestinationLong = floatingPointEquals(destinationCoordinates.long, this.currentCoordinates.long);
+                    if (!reachedDestinationLong) {
                         let longDirection = destinationCoordinates.long > this.currentCoordinates.long ? 1 : -1;
                         this.moveMarkerByDelta(0, longDirection * longSpeed);
                     }
 
-                    if (this.currentCoordinates.equals(destinationCoordinates)) {
+                    // warning: if the bus speed is too great this will not be triggered
+                    // the bus will 'jump over' the destination. equality precision and the bus speed
+                    // have to correlate
+                    if (reachedDestinationLat && reachedDestinationLong) {
+                        onBusStopReachedCallback();
+
                         clearInterval(interval);
 
                         // since floating point equality comparision might result in the bus being in a location
@@ -99,9 +106,9 @@ export class BusMarker {
         })
 
         if (selected) {
-            return new busIcon({iconUrl: 'assets/icon-double-decker-bus-selected.png'});
+            return new busIcon({ iconUrl: 'assets/icon-double-decker-bus-selected.png' });
         } else {
-            return new busIcon({iconUrl: 'assets/icon-double-decker-bus.png'});
+            return new busIcon({ iconUrl: 'assets/icon-double-decker-bus.png' });
         }
     }
 }
@@ -112,7 +119,7 @@ export class BusStop {
 
         let stopIcon = this._getStopIcon(selected);
 
-        this._marker = L.marker([coordinates.lat, coordinates.long], {icon: stopIcon}).addTo(map);
+        this._marker = L.marker([coordinates.lat, coordinates.long], { icon: stopIcon }).addTo(map);
 
         return this;
     }
@@ -126,12 +133,10 @@ export class BusStop {
         })
 
         if (selected) {
-            return new stopIcon({iconUrl: 'assets/busStop.png'});
+            return new stopIcon({ iconUrl: 'assets/busStop.png' });
         } else {
-            return new stopIcon({iconUrl: 'assets/busStopNonSelected.png'});
+            return new stopIcon({ iconUrl: 'assets/busStopNonSelected.png' });
 
         }
     }
-
-
 }
