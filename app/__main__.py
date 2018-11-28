@@ -9,6 +9,7 @@ import toml
 
 config = toml.load('config.toml')
 bapi = BristolApi(config)
+
 app = Flask(__name__, static_url_path='/static')
 api = Api(app)
 
@@ -17,9 +18,10 @@ def root():
     print (url_for('static', filename='app.js'))
     return render_template('index.html')
 
-@app.route('/routes')
-def routes():
-    return json.dumps(bapi.get_stops(BristolAPI.route_75))
+@app.route('/routes/<stopID>')
+def routes(stopID):
+    stopID = BristolApi.Stops.__dict__.get(stopID, stopID)
+    return json.dumps(bapi.get_trips_by_stopID(stopID))
 
 @app.route('/report')
 def report():

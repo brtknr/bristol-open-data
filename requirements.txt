@@ -1,6 +1,5 @@
 flask
 flask_restful
-distance
 numpy
 pandas
 toml

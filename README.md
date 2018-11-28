@@ -14,3 +14,7 @@ In your Python 3 virtual environment:
 ## Test suite:
 
     python setup.py test
+
+## Configuring nginx server:
+
+    https://gist.github.com/brtknr/7656599e66e6414e1726b1e37438784c
