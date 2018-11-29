@@ -24,7 +24,7 @@ setup(
     license='Apache (see LICENSE file)',
     description='Bristol Bus API',
     long_description=long_description,
-    python_requires=">=3.0",
+    python_requires=">=3.6",
     install_requires=requirements,
     test_suite='bristolapi.tests'
 )

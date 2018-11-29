@@ -17,4 +17,12 @@ In your Python 3 virtual environment:
 
 ## Configuring nginx server:
 
-    https://gist.github.com/brtknr/7656599e66e6414e1726b1e37438784c
+In nginx (based on http://flask.pocoo.org/snippets/35/):
+
+    location /bus {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Script-Name /bus;
+        }
